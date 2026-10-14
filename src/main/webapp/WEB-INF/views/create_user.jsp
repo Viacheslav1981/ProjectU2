@@ -20,7 +20,7 @@
                     </svg></span><span>Квесты</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navcol-3">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item"><a class="nav-link active" href="index.html">Главная</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/home-quest">Главная</a></li>
         <li class="nav-item"><a class="nav-link active" href="#">Профиль</a></li>
       </ul>
     </div>
