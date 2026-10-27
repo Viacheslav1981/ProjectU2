@@ -32,29 +32,6 @@ public class QuestService {
         return questRepository.findById(id);
     }
 
-//    public Optional<Question> findNextQuestion(Long questId, Long answerId) {
-//        Quest quest = questRepository.findById(questId)
-//                .orElseThrow(() -> new IllegalArgumentException("Квест не найден: " + questId));
-//        List<Question> questions = quest.getQuestions();
-//        for (Question question : questions) {
-//            for (Answer answer : question.getAnswers()) {
-//                if (answerId.equals(answer.getId())) {
-//                    Long nextQuestionId = answer.getNextQuestionId();
-//                    if (!nextQuestionId.equals(VICTORY_ID)
-//                            && !nextQuestionId.equals(DEFEAT_ID)) {
-//                        for (Question nextQuestion : questions) {
-//                            if (nextQuestion.getId().equals(nextQuestionId)) {
-//                                return Optional.of(nextQuestion);
-//                            }
-//                        }
-//
-//                    }
-//                }
-//            }
-//        }
-//        return Optional.empty();
-//    }
-
     public QuestResult findNextQuestion(Long questId, Long answerId) {
         Quest quest = questRepository.findById(questId)
                 .orElseThrow(() -> new IllegalArgumentException("Квест не найден: " + questId));

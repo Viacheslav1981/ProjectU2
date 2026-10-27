@@ -1,23 +1,36 @@
 package com.javarush.rukavanov.repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.javarush.rukavanov.entity.User;
+import com.javarush.rukavanov.util.JsonUtil;
 import lombok.Setter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Stream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.*;
+
 
 public class UserRepository {
     private final Map<Long, User> users = new HashMap<>();
+    private final JsonUtil jsonUtil = new JsonUtil();
+    private final Path usersFile = Path.of(
+            Objects.requireNonNull(UserRepository.class.getClassLoader()
+                            .getResource("users.json"))
+                    .getPath()
+    );
 
     @Setter
     private long nextId = 1;
 
-    public User save(User user) {
+    public UserRepository() throws IOException {
+        loadUsers();
+    }
+
+    public User save(User user) throws IOException {
         user.setId(nextId++);
         users.put(user.getId(), user);
+        saveUsers();
         return user;
     }
 
@@ -33,6 +46,36 @@ public class UserRepository {
             }
         }
         return Optional.empty();
+    }
+
+    private void loadUsers() throws IOException {
+        try (InputStream inputStream = UserRepository.class.getClassLoader().getResourceAsStream("users.json")) {
+            if (inputStream == null) {
+                throw new IOException("file not found");
+            }
+            List<User> userList = jsonUtil.read(inputStream,
+                    new TypeReference<List<User>>() {
+                    });
+
+            for (User user : userList) {
+                users.put(user.getId(), user);
+            }
+
+            nextId = users.keySet().stream()
+                    .mapToLong(Long::longValue)
+                    .max()
+                    .orElse(0L) + 1;
+
+        }
+
+    }
+
+    private void saveUsers() throws IOException {
+        jsonUtil.write(usersFile, users.values());
+    }
+
+    public List<User> findAll() {
+        return new ArrayList<>(users.values());
     }
 
 
