@@ -40,7 +40,7 @@
 </div>
 <% } %>
 <form action="${pageContext.request.contextPath}/register" method="post">
-    <div class="container mt-4">
+    <div class="container mt-4" style="max-width: 250px;">
         <div class="mb-3">
             <label for="username" class="form-label">Имя пользователя</label>
             <input type="text" class="form-control" id="username"

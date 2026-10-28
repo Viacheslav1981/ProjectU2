@@ -27,11 +27,15 @@ public class UserRepository {
         loadUsers();
     }
 
-    public User save(User user) throws IOException {
+    public void save(User user) throws IOException {
         user.setId(nextId++);
         users.put(user.getId(), user);
         saveUsers();
-        return user;
+    }
+
+    public void update(User user) throws IOException {
+        users.put(user.getId(), user);
+        saveUsers();
     }
 
     public Optional<User> findById(Long id) {

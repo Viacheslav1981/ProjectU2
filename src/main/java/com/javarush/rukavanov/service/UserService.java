@@ -30,6 +30,10 @@ public class UserService {
         return true;
     }
 
+    public void update(User user) throws IOException {
+        userRepository.update(user);
+    }
+
     public boolean authenticate(String username, String password) {
         Optional<User> user = userRepository.findByUsername(username);
         return user.map(u -> u.getPassword().equals(password)).orElse(false);
