@@ -3,7 +3,6 @@ package com.javarush.rukavanov.service;
 import com.javarush.rukavanov.entity.*;
 import com.javarush.rukavanov.repository.QuestRepository;
 import com.javarush.rukavanov.util.QuestParser;
-import jakarta.servlet.ServletException;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,11 +17,6 @@ public class QuestService {
     public QuestService() throws IOException {
         this.questRepository = new QuestRepository(new QuestParser());
     }
-
-
-//    public QuestService(QuestRepository questRepository) {
-//        this.questRepository = questRepository;
-//    }
 
     public List<Quest> findAll() {
         return questRepository.findAll();

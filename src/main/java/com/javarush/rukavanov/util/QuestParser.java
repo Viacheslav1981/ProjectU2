@@ -30,7 +30,7 @@ public class QuestParser {
     }
 
     private Quest parseQuest(String file) throws IOException {
-        try(InputStream inputStream = getQuestStream(file)) {
+        try (InputStream inputStream = getQuestStream(file)) {
             return objectMapper.readValue(inputStream, Quest.class);
         }
     }
@@ -64,7 +64,7 @@ public class QuestParser {
         }
     }
 
-    public  List<Quest> parseAllQuests() throws IOException {
+    public List<Quest> parseAllQuests() throws IOException {
         List<Quest> quests = new ArrayList<>();
         List<String> files = getQuestFiles();
         for (String fileName : files) {

@@ -4,6 +4,7 @@ import com.javarush.rukavanov.entity.User;
 import com.javarush.rukavanov.repository.UserRepository;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
@@ -38,5 +39,9 @@ public class UserService {
         Optional<User> user = userRepository.findByUsername(username);
         return user.map(u -> u.getPassword().equals(password)).orElse(false);
 
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

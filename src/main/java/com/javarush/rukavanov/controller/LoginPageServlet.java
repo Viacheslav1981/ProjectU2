@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/login-page")
 public class LoginPageServlet extends HttpServlet {
@@ -23,6 +24,11 @@ public class LoginPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        List<User> users = userService.findAll();
+        User userDefault = users.get(0);
+
+        req.setAttribute("defaultUsername", userDefault.getUsername());
+        req.setAttribute("defaultPassword", userDefault.getPassword());
         req.getRequestDispatcher("/WEB-INF/views/login.jsp")
                 .forward(req, resp);
     }
@@ -30,6 +36,8 @@ public class LoginPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
+
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 

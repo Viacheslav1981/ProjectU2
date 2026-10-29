@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
         if (isRegistered) {
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/home-quest");
-        } else  {
+        } else {
             req.setAttribute("error", "Username is already in use");
             req.getRequestDispatcher("/WEB-INF/views/create_user.jsp").forward(req, resp);
         }

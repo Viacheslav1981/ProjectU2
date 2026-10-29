@@ -1,7 +1,6 @@
 package com.javarush.rukavanov.controller;
 
 import com.javarush.rukavanov.service.QuestService;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

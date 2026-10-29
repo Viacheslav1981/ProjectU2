@@ -36,16 +36,16 @@ public class ProfilePageServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
         User user = (User) req.getSession().getAttribute("user");
-       // User user = userService.findById()
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         System.out.println(user.getId());
 
         user.setUsername(username);
-        user.setPassword(password);
+        if (password != null && !password.isBlank()) {
+            user.setPassword(password);
+        }
 
         userService.update(user);
-      //  req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
         resp.sendRedirect(req.getContextPath() + "/home-quest");
 
     }
